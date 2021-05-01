@@ -20,6 +20,19 @@ function App() {
     });
   }
 
+  const getMovieTiles = () => {
+    if(movies.length > 0){
+       return movies.map(movie => {
+        return (
+            <Movie key={movie.id} {...movie} />
+          );
+      })
+    }
+    else{
+       return(<h1>No Movies Found</h1>);
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if(searchTerm){      
@@ -38,6 +51,7 @@ function App() {
   return (
         <div>
           <header>
+            <h1 className="header-title" onClick={() => window.location = '/'}>Movies Collection</h1>
             <form onSubmit={handleSubmit}>
               <input
                className="search"
@@ -47,13 +61,9 @@ function App() {
                onChange={handleChange}/>
             </form>
           </header>
-          <div className="movie-container">
-            {movies.map(movie => {
-              return (
-                  <Movie key={movie.id} {...movie} />
-                );
-            })}
-          </div>
+            <div className="movie-container">
+              {getMovieTiles()}
+            </div>
         </div>
   );
 }

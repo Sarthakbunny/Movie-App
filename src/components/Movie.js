@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, Component } from 'react';
 
 const IMAGES_API = "https://image.tmdb.org/t/p/w1280";
 
@@ -11,21 +11,31 @@ const setVoteClass = (rate) => {
         return "red";
 }
 
-const Movie = ({title, poster_path, overview, vote_average}) => {
-    return(
-        <div className="movie">
-            <img src={IMAGES_API + poster_path} alt={title} />
-            <div className="movie-info">
-                <h3>{title}</h3>
-                <span className={`tag ${setVoteClass(vote_average)}`}>{vote_average}</span>
-            </div>
 
-            <div className="movie-over">
-                <h2>Overview</h2>
-                <p>{overview}</p>
+class Movie extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+        };
+    }
+
+    render(){
+        return(
+            <div className="movie">
+                <img src={IMAGES_API + this.props.poster_path} alt={this.props.title} />
+                <div className="movie-info">
+                    <h3>{this.props.title}</h3>
+                    <span className={`tag ${setVoteClass(this.props.vote_average)}`}>{this.props.vote_average}</span>
+                </div>
+
+                <div className="movie-over">
+                    <h2>Overview</h2>
+                    <p>{this.props.overview}</p>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Movie;
